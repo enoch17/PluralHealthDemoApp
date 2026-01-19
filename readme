@@ -1,0 +1,72 @@
+PluralHealth Demo Application
+
+PluralHealth Demo Application is a .NET Web API built to demonstrate backend design for a small healthcare system.
+The project focuses on appointments, patients, invoicing, payments, role-based access, facility scoping, validation, logging, filtering, and pagination.
+
+This implementation is intentionally kept in-memory (no database) to focus on architecture, clarity, and correctness, rather than infrastructure setup.
+
+Key Features Implemented
+Appointment listing with:
++Time window filtering (default: today)
++Clinic filtering
++Text search (patient name, code, phone)
++Sorting by appointment time
++Pagination with total count
++Appointment creation (front desk role)
++Patient wallet and currency display
++Role-based access control
++Facility (clinic) scoping
++Validation and meaningful error handling
++Clear empty-state and error responses
+
+Assumptions Made
+
+To keep the scope realistic but manageable, the following assumptions were made:
+
+1. Authentication & Users
+
+Authentication is simulated, not fully implemented.
+
+A lightweight UserContext is injected into services to represent:
+
+Username
+
+Role (Admin, FrontDesk, Staff)
+
+Clinic (facility)
+
+No database-backed User model is created, since the goal is to demonstrate authorization logic, not identity management.
+
+2. Roles
+
+Three roles are supported for demo purposes:
+
+Admin – Full access
+
+FrontDesk – Can create appointments, invoices, and process payments
+
+Staff – Read-only access to appointment listings
+
+Role checks are enforced inside services, not controllers, to keep business rules centralized.
+
+3. Facility Scoping
+
+Facility scoping means:
+
+A user can only access or create data belonging to their assigned clinic.
+
+Examples:
+
+A FrontDesk user assigned to Ikeja cannot create or view appointments for Lekki
+
+Admin users can access all clinics
+
+This is enforced in the service layer using the injected UserContext.
+
+4. Data Storage
+
+All data is stored in static in-memory collections
+
+Appointments, patients, invoices, and payments are pre-seeded
+
+This avoids database complexity and keeps the demo focused on logic and structure
