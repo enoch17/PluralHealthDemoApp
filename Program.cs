@@ -32,7 +32,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //My Services
-builder.Services.AddScoped<AppointmentService>();
+builder.Services.AddSingleton<AppointmentService>();
 builder.Services.AddScoped<AppointmentStatusFlowService>();
 builder.Services.AddScoped<PaymentService>();
 builder.Services.AddScoped<InvoiceService>();
